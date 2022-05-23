@@ -3,6 +3,8 @@ import { AllActions } from "./actions";
 
 export const setupSocket = (socket: WebSocket, dispatch: Dispatch<AllActions>) => {
 	socket.onmessage = (ev: MessageEvent) => {
-		console.log(ev);
+		const { data } = ev;
+		const action: AllActions = JSON.parse(data);
+		dispatch(action);
 	};
 };

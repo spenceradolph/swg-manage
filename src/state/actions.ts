@@ -1,9 +1,14 @@
 type LoginAction = {
-  type: "login-action";
+	type: "login-action";
 };
 
 type LogoutAction = {
-  type: "logout-action";
+	type: "logout-action";
 };
 
-export type AllActions = LoginAction | LogoutAction;
+type SocketAction = {
+	type: "socket-action";
+	socket: WebSocket;
+};
+
+export type AllActions = LoginAction | LogoutAction | SocketAction;

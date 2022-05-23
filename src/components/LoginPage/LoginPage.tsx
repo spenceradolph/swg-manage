@@ -13,9 +13,13 @@ export function LoginPage({ state, dispatch }: LoginProps) {
 	const [pass, setPass] = useState("");
 
 	const loginAction: MouseEventHandler<HTMLButtonElement> = async (e) => {
+		if (!host) return alert("host is empty");
+		if (!user) return alert("user is empty");
+		if (!pass) return alert("pass is empty");
+
 		try {
 			const WSClient: WebSocket = await new Promise(function (resolve, reject) {
-				var server = new WebSocket("ws://localhost:8080?auth=put_auth_here", "echo-protocol");
+				var server = new WebSocket(`${host}?authentication=${user}:${pass}`, "echo-protocol");
 				server.onopen = function () {
 					resolve(server);
 				};
@@ -24,8 +28,9 @@ export function LoginPage({ state, dispatch }: LoginProps) {
 				};
 			});
 			setupSocket(WSClient, dispatch);
+			dispatch({ type: "socket-action", socket: WSClient });
 		} catch (error) {
-			alert("error in socket stuff");
+			alert("unable to connect");
 		}
 	};
 

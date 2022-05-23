@@ -1,5 +1,6 @@
 import { Dispatch } from "react";
 import { AllActions, AppState } from "../../state";
+import { ControlSection } from "./ControlSection";
 
 type AdminProps = {
 	state: AppState;
@@ -13,7 +14,7 @@ export function AdminPage({ state, dispatch }: AdminProps) {
 			<div>Logs</div>
 			<div>Accounts</div>
 			<div>Settings</div>
-			<div>Control</div>
+			<ControlSection {...{ state, dispatch }} />
 		</div>
 	);
 }

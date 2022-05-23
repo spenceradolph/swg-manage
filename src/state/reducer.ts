@@ -13,6 +13,10 @@ export const reducer = (currentState: AppState, action: AllActions): AppState =>
 			return { ...currentState, isLoggedIn: false };
 		}
 
+		case "socket-action": {
+			return { ...currentState, socket: action.socket };
+		}
+
 		default: {
 			const exhaustiveCheck: never = action;
 			throw new Error(`Unhandled Action Case: ${exhaustiveCheck}`);
